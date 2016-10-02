@@ -8,7 +8,9 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import com.haulmont.cuba.core.entity.StandardEntity;
 import com.haulmont.chile.core.annotations.NamePattern;
+import com.haulmont.cuba.core.entity.annotation.Listeners;
 
+@Listeners("ceae_OrderCreatedEventListener")
 @NamePattern("%s|orderDate")
 @Table(name = "CEAE_ORDER")
 @Entity(name = "ceae$Order")

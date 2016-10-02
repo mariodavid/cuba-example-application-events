@@ -7,6 +7,13 @@ import org.springframework.context.event.EventListener
 import org.springframework.scheduling.annotation.Async
 import org.springframework.stereotype.Component
 
+
+/**
+ * Acts as EventListener
+ *
+ * Responsible for catching CustomerCreatedEvents and
+ * logging the creation of the orders, as well as the source the event occured
+ */
 @Component
 class OrderCreatedLogger {
 
@@ -17,6 +24,6 @@ class OrderCreatedLogger {
     @Async
     @EventListener
     void handleOrderCreated(OrderCreatedEvent event) {
-        log.warn("The order - ${event.order.orderDate} was created...")
+        log.warn("The order - ${event.order.orderDate} was created. Event from source: ${event.source}")
     }
 }

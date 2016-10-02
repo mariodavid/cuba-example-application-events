@@ -20,6 +20,13 @@ import org.springframework.stereotype.Component
 
 import javax.inject.Inject
 
+
+/**
+ * Acts as EventListener
+ *
+ * Responsible for catching CustomerCreatedEvents and
+ * creating a User for this newly created Customer
+ */
 @Component
 class CustomerUserCreator {
 
@@ -44,12 +51,6 @@ class CustomerUserCreator {
 
         log.warn("The user ${user.login} was created...".toString())
 
-    }
-
-    @Async
-    @EventListener
-    void handleOrderCreated(OrderCreatedEvent event) {
-        log.warn("bla bla bla")
     }
 
     private Group getGroupFromDb(String groupName) {

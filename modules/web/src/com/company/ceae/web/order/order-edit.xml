@@ -12,6 +12,9 @@
     </dsContext>
     <layout expand="windowActions"
             spacing="true">
+        <buttonsPanel>
+            <button id="notifyNewOrderBtn" invoke="notifyNewOrder" caption="New Order" />
+        </buttonsPanel>
         <fieldGroup id="fieldGroup"
                     datasource="orderDs">
             <column width="250px">
