@@ -1,5 +1,7 @@
 package com.company.ceae.service
 
+import com.company.ceae.entity.Order
+import com.company.ceae.event.OrderCreatedEvent
 import org.springframework.context.ApplicationEventPublisher
 import org.springframework.stereotype.Service
 
@@ -14,5 +16,10 @@ public class ApplicationEventProducerServiceBean implements ApplicationEventProd
     @Override
     void produceApplicationEvent(Object event) {
         publisher.publishEvent(event)
+    }
+
+    @Override
+    void produceOrderCreatedEvent(Order order, String source) {
+        publisher.publishEvent(new OrderCreatedEvent(order: order, source: source))
     }
 }

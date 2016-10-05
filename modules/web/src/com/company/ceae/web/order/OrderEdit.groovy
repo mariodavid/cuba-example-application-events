@@ -32,6 +32,6 @@ public class OrderEdit extends AbstractEditor<Order> {
     }
 
     private publishOrderCreatedEvent() {
-        applicationEventProducerService.produceApplicationEvent(new OrderCreatedEvent(order: item, source: OrderEdit.getSimpleName()))
+        applicationEventProducerService.produceOrderCreatedEvent(item, OrderEdit.getSimpleName())
     }
 }
