@@ -9,4 +9,12 @@
             template="com/company/ceae/web/order/order-edit.xml"/>
     <screen id="ceae$Order.browse"
             template="com/company/ceae/web/order/order-browse.xml"/>
+    <screen id="mainWindow"
+            template="com/company/ceae/web/screens/ext-mainwindow.xml"/>
+    <screen id="ceae$Notification.browse"
+            template="com/company/ceae/web/notification/notification-browse.xml"/>
+    <screen id="ceae$NotificationSubscription.browse"
+            template="com/company/ceae/web/notificationsubscription/notification-subscription-browse.xml"/>
+    <screen id="ceae$NotificationSubscription.edit"
+            template="com/company/ceae/web/notificationsubscription/notification-subscription-edit.xml"/>
 </screen-config>

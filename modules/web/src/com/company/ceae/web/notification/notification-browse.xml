@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://browseCaption"
+        class="com.company.ceae.web.notification.NotificationBrowse"
+        focusComponent="notificationsTable"
+        lookupComponent="notificationsTable"
+        messagesPack="com.company.ceae.web.notification">
+    <dsContext>
+        <groupDatasource id="notificationsDs"
+                         class="com.company.ceae.entity.Notification"
+                         view="notification-view">
+            <query>
+                <![CDATA[select e from ceae$Notification e where e.user.id = :session$userId order by e.read asc]]>
+            </query>
+        </groupDatasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="notificationsTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="notificationsTable"
+                datasource="notificationsDs">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="notificationsTable"
+                    width="100%">
+            <actions>
+                <action id="create"/>
+                <action id="edit"/>
+                <action id="remove"/>
+                <action id="markAsReadAction"
+                        trackSelection="true"
+                        invoke="markAsRead"
+                        icon="font-icon:CHECK_SQUARE_O"
+                        caption="msg://markAsRead"/>
+            </actions>
+            <columns>
+                <column id="message"/>
+                <column id="entityCaption"/>
+                <column id="read"/>
+            </columns>
+            <rows datasource="notificationsDs"/>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="markAsReadBtn"
+                        action="notificationsTable.markAsReadAction"/>
+                <button id="removeBtn"
+                        action="notificationsTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+    </layout>
+</window>

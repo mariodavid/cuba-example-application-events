@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <views xmlns="http://schemas.haulmont.com/cuba/view.xsd">
-
+    <view class="com.company.ceae.entity.Notification"
+          extends="_local"
+          name="notification-view">
+        <property name="user"
+                  view="_minimal"/>
+    </view>
+    <view class="com.company.ceae.entity.NotificationSubscription"
+          extends="_local"
+          name="notificationSubscription-view">
+        <property name="user"
+                  view="_minimal"/>
+    </view>
 </views>

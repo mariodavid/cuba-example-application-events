@@ -4,5 +4,6 @@
           insertBefore="administration">
         <item id="ceae$Customer.browse"/>
         <item id="ceae$Order.browse"/>
+        <item id="ceae$NotificationSubscription.browse"/>
     </menu>
 </menu-config>

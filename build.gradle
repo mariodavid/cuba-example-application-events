@@ -2,6 +2,7 @@
 buildscript {
     ext.cubaVersion = '6.4.2'
     repositories {
+        mavenLocal()
         maven {
             url 'https://repo.cuba-platform.com/content/groups/work'
             credentials {
@@ -13,8 +14,7 @@ buildscript {
     }
     dependencies {
         classpath "com.haulmont.gradle:cuba-plugin:$cubaVersion"
-
-        classpath "com.haulmont.cuba:cuba-global:$cubaVersion"
+        classpath "de.diedavids.cuba.console:console-global:0.1-SNAPSHOT"
 
         
     }

@@ -12,6 +12,10 @@
             <map>
                 <entry key="ceae_ApplicationEventProducerService"
                        value="com.company.ceae.service.ApplicationEventProducerService"/>
+                <entry key="ceae_NotificationService"
+                       value="com.company.ceae.service.NotificationService"/>
+                <entry key="ceae_NotificationSubscriptionService"
+                       value="com.company.ceae.service.NotificationSubscriptionService"/>
             </map>
         </property>
     </bean>
