@@ -11,6 +11,7 @@ create table CEAE_CUSTOMER (
     --
     NAME varchar(255) not null,
     FIRST_NAME varchar(255),
+    CUSTOMER_TYPE varchar(50),
     --
     primary key (ID)
 )^

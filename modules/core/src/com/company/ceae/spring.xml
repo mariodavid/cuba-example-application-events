@@ -2,10 +2,32 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:task="http://www.springframework.org/schema/task"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
     <!-- Annotation-based beans -->
     <context:component-scan base-package="com.company.ceae"/>
 
+    <!-- 1. i tried to create a bean definition like this: -->
+    <!-- @see http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/scheduling/annotation/EnableAsync.html -->
+
+    <!--
+    <beans>
+        <task:annotation-driven executor="myExecutor"/>
+        <task:executor id="myExecutor" pool-size="7-42" queue-capacity="11"/>
+        <bean id="exceptionHandler" class="com.company.ceae.listener.application.ExecutorExceptionHandler"/>
+    </beans>
+    -->
+
+    <!-- tried a reference to 'the' cuba scheduler-->
+    <!-- @see https://github.com/cuba-platform/cuba/blob/1a8f7221a14dd92e58923bf264df47ab277eb40a/modules/core/src/cuba-spring.xml#L185 -->
+    <!-- didn't work either -->
+
+    <!--
+    <beans>
+        <task:annotation-driven executor="scheduler"/>
+        <bean id="exceptionHandler" class="com.company.ceae.listener.application.ExecutorExceptionHandler"/>
+    </beans>
+    -->
 </beans>

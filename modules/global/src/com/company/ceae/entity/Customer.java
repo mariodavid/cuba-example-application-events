@@ -20,6 +20,18 @@ public class Customer extends StandardEntity {
     @Column(name = "FIRST_NAME")
     protected String firstName;
 
+    @Column(name = "CUSTOMER_TYPE")
+    protected String customerType;
+
+    public void setCustomerType(CustomerType customerType) {
+        this.customerType = customerType == null ? null : customerType.getId();
+    }
+
+    public CustomerType getCustomerType() {
+        return customerType == null ? null : CustomerType.fromId(customerType);
+    }
+
+
     public void setName(String name) {
         this.name = name;
     }

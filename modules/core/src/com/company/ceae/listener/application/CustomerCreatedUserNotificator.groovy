@@ -12,8 +12,9 @@ import com.company.ceae.service.NotificationSubscriptionService
 import com.haulmont.cuba.core.global.DataManager
 import com.haulmont.cuba.core.global.Metadata
 import com.haulmont.cuba.core.global.UserSessionSource
-import com.haulmont.cuba.security.app.UserSessionService
-import com.haulmont.cuba.security.app.UserSessionsAPI
+import com.haulmont.cuba.core.sys.AppContext
+import com.haulmont.cuba.core.sys.SecurityContext
+import com.haulmont.cuba.security.app.Authentication
 import org.springframework.context.event.EventListener
 import org.springframework.scheduling.annotation.Async
 import org.springframework.stereotype.Component
@@ -44,10 +45,10 @@ class CustomerCreatedUserNotificator {
     @Async
     @EventListener
     void handleCustomerCreated(CustomerCreatedEvent event) {
-        createNotificationForCurrentUser(event.customer)
+        createNotificationsForCustomerCreatedEvent(event.customer)
     }
 
-    private void createNotificationForCurrentUser(Customer customer) {
+    private void createNotificationsForCustomerCreatedEvent(Customer customer) {
 
         def notificationSubscriptions = notificationSubscriptionService.getNotificationSubscriptionsForEntityClass(customer.metaClass.name)
 
@@ -61,21 +62,32 @@ class CustomerCreatedUserNotificator {
         def isValidForUser = isSubscriptionValidForUser(customer, notificationSubscription)
 
         if (isValidForUser) {
-
-            Notification notification = metadata.create(Notification.class)
-            notification.read = false
-            notification.user = notificationSubscription.user
-            notification.entityClass = customer.metaClass.name
-            notification.entityCaption = customer.instanceName
-            notification.entityId = customer.id
-            dataManager.commit(notification)
-
+            createNotification(notificationSubscription, customer)
         }
     }
 
     private boolean isSubscriptionValidForUser(Customer customer, NotificationSubscription notificationSubscription) {
-
         def condition = notificationSubscription.condition.replace("{E}", "x")
-        Eval.x(customer, condition)
+        def result = false
+        try {
+            result = Eval.x(customer, condition)
+        }
+        catch (Exception e) {
+            e.printStackTrace()
+        }
+
+        result
+
     }
+
+    private void createNotification(NotificationSubscription notificationSubscription, Customer customer) {
+        Notification notification = metadata.create(Notification.class)
+        notification.read = false
+        notification.user = notificationSubscription.user
+        notification.entityClass = customer.metaClass.name
+        notification.entityCaption = customer.instanceName
+        notification.entityId = customer.id
+        dataManager.commit(notification)
+    }
+
 }

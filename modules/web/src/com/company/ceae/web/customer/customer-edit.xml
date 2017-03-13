@@ -17,6 +17,7 @@
             <column width="250px">
                 <field id="name"/>
                 <field id="firstName"/>
+                <field id="customerType"/>
             </column>
         </fieldGroup>
         <frame id="windowActions"
