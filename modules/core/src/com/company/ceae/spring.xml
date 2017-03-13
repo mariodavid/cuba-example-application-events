@@ -24,10 +24,10 @@
     <!-- @see https://github.com/cuba-platform/cuba/blob/1a8f7221a14dd92e58923bf264df47ab277eb40a/modules/core/src/cuba-spring.xml#L185 -->
     <!-- didn't work either -->
 
-    <!--
+
     <beans>
         <task:annotation-driven executor="scheduler"/>
         <bean id="exceptionHandler" class="com.company.ceae.listener.application.ExecutorExceptionHandler"/>
     </beans>
-    -->
+
 </beans>

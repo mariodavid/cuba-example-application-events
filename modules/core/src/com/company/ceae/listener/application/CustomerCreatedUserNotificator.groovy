@@ -42,10 +42,20 @@ class CustomerCreatedUserNotificator {
     @Inject
     NotificationSubscriptionService notificationSubscriptionService
 
+    @Inject
+    Authentication authentication
+
     @Async
     @EventListener
     void handleCustomerCreated(CustomerCreatedEvent event) {
-        createNotificationsForCustomerCreatedEvent(event.customer)
+        authentication.begin()
+        try {
+            createNotificationsForCustomerCreatedEvent(event.customer)
+        }
+        finally {
+            authentication.end()
+        }
+
     }
 
     private void createNotificationsForCustomerCreatedEvent(Customer customer) {
