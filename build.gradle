@@ -14,9 +14,6 @@ buildscript {
     }
     dependencies {
         classpath "com.haulmont.gradle:cuba-plugin:$cubaVersion"
-        classpath "de.diedavids.cuba.console:console-global:0.1-SNAPSHOT"
-
-        
     }
 }
 
