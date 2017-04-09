@@ -17,6 +17,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.context.event.EventListener
 import org.springframework.scheduling.annotation.Async
 import org.springframework.stereotype.Component
+import com.haulmont.cuba.security.app.Authentication
 
 import javax.inject.Inject
 
@@ -39,6 +40,10 @@ class CustomerUserCreator {
 
     @Inject
     Metadata metadata
+    
+    
+    @Inject
+    Authentication authentication
 
 
     @Async
@@ -46,11 +51,16 @@ class CustomerUserCreator {
     void handleCustomerCreated(CustomerCreatedEvent event) {
         log.warn("The customer was created...")
 
-        Group company = getGroupFromDb("Company")
-        User user = createUserFromCustomer(company, event.customer)
+        authentication.begin()
+        try {
+            Group company = getGroupFromDb("Company")
+            User user = createUserFromCustomer(company, event.customer)
 
-        log.warn("The user ${user.login} was created...".toString())
-
+            log.warn("The user ${user.login} was created...".toString())
+        }
+        finally {
+            authentication.end()
+        }
     }
 
     private Group getGroupFromDb(String groupName) {
